@@ -1,0 +1,9 @@
+# AM_MINISIP_CHECK_LIBMSIP(VERSION)
+# ----------------------------------
+AC_DEFUN([AM_MINISIP_CHECK_LIBMSIP],[ 
+	AC_REQUIRE([AM_MINISIP_CHECK_LIBMCRYPTO]) dnl
+	AC_MINISIP_WITH_ARG(MSIP, msip, libmsip, $1, [REQUIRED])
+	AC_MINISIP_CHECK_LIBRARY(MSIP, libmsip, libmsip_config.h, msip)
+  ])
+# End of AM_MINISIP_CHECK_LIBMSIP
+#

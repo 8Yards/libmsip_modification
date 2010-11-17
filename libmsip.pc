@@ -1,0 +1,14 @@
+prefix=/usr/local
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+pkglibdir=${libdir}/libmsip
+includedir=${prefix}/include
+pkgincludedir=${includedir}/libmsip
+
+Name: libmsip
+Description: Minisip Session Initiation Protocol (SIP) Library
+Version: 0.8.0+r3784M
+Requires: libmutil >= 0.8.0, libmcrypto >= 0.8.0, libmnetutil >= 0.8.0
+Libs: -L${libdir} -lmsip
+Libs.private: -L/usr/local/lib -lmcrypto -lmnetutil -lmutil   -L/usr/local/lib -lmnetutil -lmutil   -L/usr/local/lib -lmutil    
+Cflags: -I${includedir}
