@@ -39,6 +39,7 @@ class LIBMSIP_API SipMessageContentMime : public SipMessageContent{
 		SipMessageContentMime(std::string content, std::string ContentTyp);
 		virtual std::string getString() const;
 		virtual std::string getContentType() const;
+		std::string getContentTypeWithoutParameters() const;
 		virtual std::string getMemObjectType() const {return "SipMessageContentMime";}
 		void addPart(MRef<SipMessageContent*> part);
 		MRef<SipMessageContent*> popFirstPart();

@@ -118,8 +118,12 @@ std::string SipMessageContentMime::getString() const{
 
 std::string SipMessageContentMime::getContentType() const{
 	if(ContentType.substr(0,9) == "multipart")
-		return ContentType +"; boundary=" + boundry;
-	else
+			return ContentType +"; boundary=" + boundry;
+		else
+			return ContentType;
+}
+
+std::string SipMessageContentMime::getContentTypeWithoutParameters() const{
 		return ContentType;
 }
 
