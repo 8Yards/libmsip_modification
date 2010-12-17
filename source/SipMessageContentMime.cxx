@@ -123,8 +123,8 @@ std::string SipMessageContentMime::getContentType() const{
 			return ContentType;
 }
 
-std::string SipMessageContentMime::getContentTypeWithoutParameters() const{
-		return ContentType;
+std::string SipMessageContentMime::getContentTypeWithoutParameters() const {
+	return ContentType;
 }
 
 void SipMessageContentMime::setBoundry(std::string b){
@@ -144,6 +144,18 @@ void SipMessageContentMime::addPart(MRef<SipMessageContent*> part){
 	parts.push_back(part);
 }
 
+int SipMessageContentMime::replacePart(MRef<SipMessageContent*> part) {
+	std::list<MRef<SipMessageContent*> >::const_iterator iter;
+		for (iter = parts.begin(); iter != parts.end(); iter++) {
+			if ((*iter)->getMemObjectType() == part->getMemObjectType()) {
+				parts.remove(*iter);
+				break;
+			}
+		}
+		parts.push_back(part);
+		return parts.size();
+}
+
 MRef<SipMessageContent*> SipMessageContentMime::popFirstPart() {
 	if(!parts.empty()){
 		MRef<SipMessageContent*> part = parts.front(); 
@@ -155,6 +167,25 @@ MRef<SipMessageContent*> SipMessageContentMime::popFirstPart() {
 }
 	
 
+MRef<SipMessageContent*> SipMessageContentMime::getPartByType(std::string objectType) {
+	std::list<MRef<SipMessageContent*> >::const_iterator iter;
+	for (iter = parts.begin(); iter != parts.end(); iter++) {
+		if ((*iter)->getMemObjectType() == objectType) {
+			return (*iter);
+		}
+	}
+	return NULL;
+}
 
+int SipMessageContentMime::removePartByType(std::string objectType) {
+	std::list<MRef<SipMessageContent*> >::const_iterator iter;
+	for (iter = parts.begin(); iter != parts.end(); iter++) {
+		if ((*iter)->getMemObjectType() == objectType) {
+			parts.remove(*iter);
+			return parts.size();
+		}
+	}
+	return parts.size();
+}
 
 
